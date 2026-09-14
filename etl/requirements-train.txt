@@ -1,0 +1,7 @@
+torch
+segmentation-models-pytorch==0.5.0
+scipy
+rasterio
+geopandas
+numpy
+pytest

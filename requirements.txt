@@ -1,0 +1,2 @@
+# PC-local pipeline deps (no Docker). Install: pip install -r requirements.txt
+-r etl/requirements-train.txt

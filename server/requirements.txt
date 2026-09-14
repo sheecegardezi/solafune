@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+rio-tiler==9.4.4
+morecantile==7.0.3
+rasterio
+numpy
+pytest
+httpx  # required by fastapi.testclient in server/tests

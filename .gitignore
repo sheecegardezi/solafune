@@ -1,0 +1,20 @@
+data/
+models/
+.venv_local/
+node_modules/
+__pycache__/
+*.pyc
+.pytest_cache/
+frontend/dist/
+*.tsbuildinfo
+*.bak.*
+project-env.json
+
+
+# AI-agent artifacts
+.impeccable/
+docs/plans/
+frontend/.env
+
+# local deploy config
+deploy/

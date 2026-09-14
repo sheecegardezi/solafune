@@ -1,0 +1,38 @@
+# GPU-mandatory compose file — the only compose file in this repo.
+# The train service requires an NVIDIA GPU; `docker compose` fails to
+# start it if no GPU is available.
+services:
+  server:
+    build: ./server
+    ports: ["8000:8000"]
+    volumes:
+      - ./data:/data:ro
+      - ./models:/models:ro
+    environment:
+      DATA_DIR: /data
+      MODELS_DIR: /models
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API: ""
+    ports: ["5173:3000"]
+    depends_on: [server]
+  train:
+    build:
+      context: .
+      dockerfile: etl/Dockerfile.train
+    environment:
+      NVIDIA_VISIBLE_DEVICES: all
+    volumes:
+      - ./data:/data
+      - ./models:/models
+      - ./etl:/etl
+    working_dir: /
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]

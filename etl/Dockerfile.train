@@ -1,0 +1,6 @@
+FROM nvidia/cuda:12.6.3-runtime-ubuntu24.04
+RUN apt-get update && apt-get install -y --no-install-recommends python3.12 python3-pip && rm -rf /var/lib/apt/lists/*
+WORKDIR /
+COPY etl/requirements-train.txt /etl/requirements-train.txt
+RUN pip install --no-cache-dir --break-system-packages -r /etl/requirements-train.txt
+CMD ["python3", "/etl/3_train.py"]   # digit-prefixed modules: 4_infer imports it via __import__("3_train") (sys.path[0]=/etl)
